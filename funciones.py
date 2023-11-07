@@ -1,4 +1,5 @@
-def abrirLaberinto(fuente):
+def abrirLaberinto(fuente:str):
+  """Esta función abre un archivo de texto y lo convierte en una matriz de caracteres Costo: O(n*m)"""
     with open(fuente, "r") as archivo:
         laberinto = []
         linea = archivo.readline().strip()
@@ -14,6 +15,7 @@ class SolucionOptima:
 
 
 def encontrarCaracter(laberinto, caracter):
+    """Esta funcion busca un caracter en la matriz y regresa su posición. Costo: O(n*m)"""
     entrada = ()
     for i in range(len(laberinto)):
         for j in range(len(laberinto[0])):
@@ -23,6 +25,7 @@ def encontrarCaracter(laberinto, caracter):
 
 
 def buscarPortal(matriz, inicial: tuple, letra):
+    """Esta funcion busca un portal en la matriz y regresa la posición del otro portal Costo: O(n*m)"""
     regreso = ()
     for i in range(len(matriz)):
         for j in range(len(matriz[0])):
@@ -32,14 +35,17 @@ def buscarPortal(matriz, inicial: tuple, letra):
 
 
 def esPosible(f, c, matriz):
+  """Esta funcion verifica si es posible moverse a una casilla. Costo: O(1)"""
     return 0 <= f < len(matriz) and 0 <= c < len(matriz[0]) and matriz[f][c] != "#"
 
 
 def calcular_distancia(origen: tuple, salida: tuple) -> float:
+    """Esta funcion calcula la distancia entre dos puntos segun la distancia de Manhattan. Costo: O(1)"""
     return (abs(origen[0] - salida[0]) + abs(origen[1] - salida[1]))
 
 
 def buscarPortales(laberinto):
+    """Esta funcion busca todos los portales en el laberinto y los regresa en un diccionario. Costo: O(n*m)"""
     portales = dict()
     for i in range(len(laberinto)):
         for j in range(len(laberinto[0])):
@@ -51,6 +57,7 @@ def buscarPortales(laberinto):
 
 
 def distanciaPortal(origen, portales: dict, salida):
+  """Esta funcion calcula la distancia de un portal a la salida, desde la posicion actual del jugador hasta el portal y del portal a la salida Costo: O(n*m) siendo n el numero de portales y m el numero de casillas"""
     distancia_minima = float("inf")
     for i in portales.keys():
         for j in portales[i]:
