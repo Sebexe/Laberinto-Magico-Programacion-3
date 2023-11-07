@@ -43,7 +43,6 @@ def solucion(f: int, c: int, laberinto: list[list[str]], matrizVis: list[list[in
     if laberinto[f][c] == "S":
         if contador < mejor_solucion.mejor_camino or mejor_solucion.mejor_camino == -1:
             mejor_solucion.mejor_camino = contador
-            print(contador)
         return
 
     matrizVis[f][c] = 1
