@@ -1,5 +1,5 @@
-def abrirLaberinto(fuente:str):
-  """Esta función abre un archivo de texto y lo convierte en una matriz de caracteres Costo: O(n*m)"""
+def abrirLaberinto(fuente: str):
+    """Esta función abre un archivo de texto y lo convierte en una matriz de caracteres Costo: O(n*m)"""
     with open(fuente, "r") as archivo:
         laberinto = []
         linea = archivo.readline().strip()
@@ -35,7 +35,7 @@ def buscarPortal(matriz, inicial: tuple, letra):
 
 
 def esPosible(f, c, matriz):
-  """Esta funcion verifica si es posible moverse a una casilla. Costo: O(1)"""
+    """Esta funcion verifica si es posible moverse a una casilla. Costo: O(1)"""
     return 0 <= f < len(matriz) and 0 <= c < len(matriz[0]) and matriz[f][c] != "#"
 
 
@@ -57,7 +57,7 @@ def buscarPortales(laberinto):
 
 
 def distanciaPortal(origen, portales: dict, salida):
-  """Esta funcion calcula la distancia de un portal a la salida, desde la posicion actual del jugador hasta el portal y del portal a la salida Costo: O(n*m) siendo n el numero de portales y m el numero de casillas"""
+    """Esta funcion calcula la distancia de un portal a la salida, desde la posicion actual del jugador hasta el portal y del portal a la salida Costo: O(n*m) siendo n el numero de portales y m el numero de casillas"""
     distancia_minima = float("inf")
     for i in portales.keys():
         for j in portales[i]:
