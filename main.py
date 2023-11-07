@@ -2,10 +2,10 @@ from funciones import *
 
 
 def solucion(f: int, c: int, laberinto: list[list[str]], matrizVis: list[list[int]], contador: int, mejor_solucion: SolucionOptima, salida: tuple, portales: dict):
-    distancia_acumulada = calcular_distancia((f, c), salida)
+    distancia_restante = calcular_distancia((f, c), salida)
     portales = buscarPortales(laberinto)
     posiblePortal = distanciaPortal((f, c), portales, salida)
-    if (contador - posiblePortal >= mejor_solucion.mejor_camino or distancia_acumulada > mejor_solucion.mejor_camino) and mejor_solucion.mejor_camino != -1:
+    if (contador - posiblePortal >= mejor_solucion.mejor_camino or distancia_restante > mejor_solucion.mejor_camino) and mejor_solucion.mejor_camino != -1:
         return
     if laberinto[f][c] == "S":
         if contador < mejor_solucion.mejor_camino or mejor_solucion.mejor_camino == -1:
