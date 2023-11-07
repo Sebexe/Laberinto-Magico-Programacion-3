@@ -23,12 +23,10 @@ def encontrarCaracter(laberinto, caracter):
 
 
 def buscarPortal(matriz, inicial: tuple, letra):
-    regreso = ()
-    for i in range(len(matriz)):
-        for j in range(len(matriz[0])):
-            if matriz[i][j] == letra and (not (i == inicial[0] and j == inicial[1])):
-                regreso = (i, j)
-    return regreso
+  for i, row in enumerate(matriz):
+    if letra in row and (i, row.index(letra)) != inicial:
+      return (i, row.index(letra))
+  return ()
 
 
 def esPosible(f, c, matriz):
@@ -51,11 +49,10 @@ def buscarPortales(laberinto):
 
 
 def distanciaPortal(origen, portales: dict, salida):
-    distancia_minima = float("inf")
-    for i in portales.keys():
-        for j in portales[i]:
-            distanciaTotal = calcular_distancia(
-                origen, j) + calcular_distancia(portales[i][0], portales[i][1]) + min(calcular_distancia(portales[i][0], salida), calcular_distancia(portales[i][1], salida))
-            if distanciaTotal < distancia_minima:
-                distancia_minima = distanciaTotal
-    return distancia_minima
+  distancia_minima = float("inf")
+  for i in portales.keys():
+    for j in portales[i]:
+      distanciaTotal = (abs(origen[0] - j[0]) + abs(origen[1] - j[1])) + (abs(portales[i][0][0] - portales[i][1][0]) + abs(portales[i][0][1] - portales[i][1][1])) + (calcular_distancia(portales[i][0], salida) if calcular_distancia(portales[i][0], salida) < calcular_distancia(portales[i][1], salida) else calcular_distancia(portales[i][1], salida))
+      if distanciaTotal < distancia_minima:
+        distancia_minima = distanciaTotal
+  return distancia_minima
