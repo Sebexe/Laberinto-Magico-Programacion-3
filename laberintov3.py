@@ -33,7 +33,7 @@ def esPosible(f, c, matriz):
     return 0 <= f < len(matriz) and 0 <= c < len(matriz[0]) and matriz[f][c] != "#"
 
 def calcular_distancia(origen: tuple, salida: tuple) -> float:
-    return ((origen[0] - salida[0]) ** 2 + (origen[1] - salida[1]) ** 2) ** 0.5
+    return (abs(origen[0] - salida[0]) + abs(origen[1] - salida[1]))
 
 def solucion(f: int, c: int, laberinto: list[list[str]], matrizVis: list[list[int]], contador: int, mejor_solucion: SolucionOptima, salida: tuple):
     distancia_acumulada = calcular_distancia((f, c), salida)
@@ -60,7 +60,7 @@ def solucion(f: int, c: int, laberinto: list[list[str]], matrizVis: list[list[in
 
 
 def main():
-  laberinto = abrirLaberinto("laberinto.txt")
+  laberinto = abrirLaberinto("Python\laberinto.txt")
   entrada = encontrarCaracter(laberinto,'E')
   salida = encontrarCaracter(laberinto,'S')  
   matrizVisitados = [[0 for _ in range(len(laberinto[0]))] for _ in range(len(laberinto))]
