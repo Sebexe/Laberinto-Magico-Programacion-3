@@ -4,15 +4,9 @@ Objetivo: Resolver un laberinto magico (magico porque tiene portales) usando bac
 
 Lenguaje: Python
 
-Sorpresa: [link] (https://github.com/Szafra16/TPO-C)
+Sorpresa: [Repositorio] 
 
 
 
 
-This [website (https://stackoverflow.com)][website] is awesome.
-
-You will never use anything else than this [website].
-
-Check out <https://stackoverflow.com> for more fun.
-
-[website]: https://stackoverflow.com
+[repositorio]: https://github.com/Szafra16/TPO-C
