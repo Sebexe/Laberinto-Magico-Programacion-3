@@ -48,9 +48,6 @@ def esPosible(f, c, matriz):
     return posible
 
 
-(-1, 0),
-
-
 soluciones = []
 
 
@@ -75,8 +72,9 @@ def solucion(f: int, c: int, laberinto: list[list[str]], matrizVis: list[list[in
                      contador + 1)
 
 
+
 entrada = encontrarEntrada(laberinto)
 
 solucion(entrada[0], entrada[1], laberinto, matrizVisitados)
 
-print(soluciones)
+print(min(soluciones))
