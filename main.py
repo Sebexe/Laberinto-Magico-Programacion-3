@@ -1,3 +1,10 @@
+import time,os
+
+def imprimirMatriz(matriz):
+    for i in matriz:
+        print(i)
+
+
 def abrirLaberinto(fuente):
   with open(fuente,"r") as archivo:
     laberinto = []
@@ -49,12 +56,15 @@ def solucion(f: int, c: int, laberinto: list[list[str]], matrizVis: list[list[in
     for i in [(1, 0), (0, -1), (-1, 0), (0, 1)]:
         if laberinto[f][c] not in ["#", ".", "E", "S"]:
             otroPortal = buscarPortal(laberinto, (f, c), laberinto[f][c])
-            laberinto[f][c] = "."
-            laberinto[otroPortal[0]][otroPortal[1]] = "."
-            solucion(otroPortal[0], otroPortal[1], laberinto, matrizVis, contador + 1, mejor_solucion, salida)
+            temporalcar = laberinto[f][c]
+            if matrizVis[otroPortal[0]][otroPortal[1]] != 1:
+                laberinto[f][c] = "."
+                laberinto[otroPortal[0]][otroPortal[1]] = "."
+                solucion(otroPortal[0], otroPortal[1], laberinto, matrizVis, contador + 1, mejor_solucion, salida)
+            laberinto[f][c] = temporalcar
+            laberinto[otroPortal[0]][otroPortal[1]] = temporalcar
         elif esPosible(f + i[0], c + i[1], laberinto) and matrizVis[f + i[0]][c + i[1]] != 1:
             solucion(f + i[0], c + i[1], laberinto, matrizVis, contador + 1, mejor_solucion, salida)
-
     matrizVis[f][c] = 0
 
 
