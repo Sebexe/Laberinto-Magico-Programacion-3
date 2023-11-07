@@ -60,7 +60,7 @@ def solucion(f: int, c: int, laberinto: list[list[str]], matrizVis: list[list[in
 
 
 def main():
-  laberinto = abrirLaberinto("Python\laberinto.txt")
+  laberinto = abrirLaberinto("laberinto.txt")
   entrada = encontrarCaracter(laberinto,'E')
   salida = encontrarCaracter(laberinto,'S')  
   matrizVisitados = [[0 for _ in range(len(laberinto[0]))] for _ in range(len(laberinto))]
