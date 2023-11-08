@@ -11,4 +11,4 @@ laberintoVeloz: El archivo que contiene la funcion de backtracking que obtiene u
 
 
 
-[repositorio]: https://github.com/Szafra16/TPO-C
+Alternativo: https://github.com/Szafra16/TPO-C
