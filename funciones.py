@@ -9,13 +9,6 @@ def abrirLaberinto(fuente: str) -> list[list[str]]:
     return laberinto
 
 
-
-class SolucionOptima:
-    def __init__(self) -> None:
-        self.mejor_camino = -1
-
-
-
 def encontrarCaracter(laberinto : list[list[str]], caracter:str) -> tuple:
     """Esta funcion busca un caracter en la matriz y regresa su posición. Costo: O(n*m)"""
     entrada = ()
@@ -68,3 +61,20 @@ def distanciaPortal(origen, portales: dict, salida) -> int:
             if distanciaTotal < distancia_minima:
                 distancia_minima = distanciaTotal
     return distancia_minima
+
+
+def exportarSolucion(laberinto,matriz):
+    with open('laberintoSolucion.txt','w') as archivo:
+        for i in range(len(laberinto)):
+            for j in range(len(laberinto[0])):
+                if matriz[i][j] == 1 and laberinto[i][j] == ".":
+                    archivo.write("X")
+                else:
+                    archivo.write(laberinto[i][j])
+            archivo.write("\n")
+
+
+class SolucionOptima:
+    def __init__(self) -> None:
+        self.mejor_camino = -1
+        self.matrizVisitados = []
