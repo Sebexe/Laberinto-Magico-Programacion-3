@@ -14,7 +14,7 @@ def solucion(f: int, c: int, laberinto: list[list[str]], matrizVis: list[list[in
     matrizVis[f][c] = 1
 
     if laberinto[f][c] not in ["#", ".", "E", "S"]:
-        otroPortal = buscarPortal(laberinto, (f, c), laberinto[f][c])
+        otroPortal = buscarPortalSalida(laberinto, (f, c), laberinto[f][c])
         if len(otroPortal) == 2 and matrizVis[otroPortal[0]][otroPortal[1]] != 1:
             letraPortal = laberinto[f][c]
             laberinto[f][c] = "."
@@ -41,7 +41,7 @@ def main():
     solucion(entrada[0], entrada[1], laberinto,
              matrizVisitados, 0, mejor_solucion)
     print("Mejor solución:", mejor_solucion.mejor_camino)
-    exportarSolucion(laberinto, mejor_solucion.matrizVisitados)
+    exportarSolucion(laberinto, mejor_solucion.matrizVisitados,mejor_solucion.mejor_camino)
 
 
 if __name__ == "__main__":
