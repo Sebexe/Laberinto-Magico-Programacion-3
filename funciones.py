@@ -1,3 +1,4 @@
+from typing import List, Tuple, Dict
 def abrirLaberinto(fuente: str) -> list[list[str]]:
     """Esta función abre un archivo de texto y lo convierte en una matriz de caracteres Costo: O(n*m)"""
     with open(fuente, "r") as archivo:
@@ -49,6 +50,38 @@ def exportarSolucion(laberinto, matriz, movimientos):
                     else:
                         archivo.write(laberinto[i][j])
                 archivo.write("\n")
+
+
+
+
+def buscar_portales(laberinto: List[List[str]]) -> Dict[str, List[Tuple[int, int]]]:
+    """Esta funcion busca todos los portales en el laberinto y los regresa en un diccionario. Costo: O(n*m)"""
+    portales = {}
+    for row, line in enumerate(laberinto):
+        for col, char in enumerate(line):
+            if char not in [".", "#", "E", "S"] and char in portales:
+                portales[char].append((row, col))
+            elif char not in [".", "#", "E", "S"]:
+                portales[char] = [(row, col)]
+    return portales
+
+
+def distancia_portal(origen: Tuple[int, int], portales: Dict[str, List[Tuple[int, int]]], salida: Tuple[int, int]) -> int:
+    """Esta funcion calcula la distancia de un portal a la salida, desde la posicion actual del jugador hasta el portal y del portal a la salida Costo: O(n)"""
+    distancia_minima = float("inf")
+    for portal in portales.values():
+        for portal_pos in portal:
+            distancia_total = calcular_distancia(origen, portal_pos) + calcular_distancia(portal_pos, salida)
+            if distancia_total < distancia_minima:
+                distancia_minima = distancia_total
+    return distancia_minima
+
+
+def podar_o_no_podar(pos: Tuple[int, int], salida: Tuple[int, int], contador: int, mejor_camino: int, laberinto: List[List[str]]) -> bool:
+    """Esta funcion verifica si se debe podar el arbol de busqueda o no"""
+    primera_condicion = calcular_distancia(pos, salida) + contador > mejor_camino
+    segunda_condicion = distancia_portal(pos, buscar_portales(laberinto), salida) + contador < mejor_camino
+    return primera_condicion and segunda_condicion
 
 
 class SolucionOptima:
