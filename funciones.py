@@ -59,7 +59,7 @@ def buscarPortales(laberinto) -> dict:
 
 
 def distanciaPortal(origen, portales: dict, salida) -> int:
-    """Esta funcion calcula la distancia de un portal a la salida, desde la posicion actual del jugador hasta el portal y del portal a la salida Costo: O(n*m) siendo n el numero de portales y m el numero de casillas"""
+    """Esta funcion calcula la distancia de un portal a la salida, desde la posicion actual del jugador hasta el portal y del portal a la salida Costo: O(n)"""
     distancia_minima = float("inf")
     for i in portales.keys():
         for j in portales[i]:
