@@ -1,12 +1,11 @@
 from funciones import *
 
 
-def solucion(f: int, c: int, laberinto: list[list[str]], matrizVis: list[list[int]], contador: int, mejor_solucion: SolucionOptima, salida: tuple, portales: dict):
+def solucion(f: int, c: int, laberinto: list[list[str]], matrizVis: list[list[int]], contador: int, mejor_solucion: SolucionOptima, salida: tuple):
     distancia_restante = calcular_distancia((f, c), salida)
     portales = buscarPortales(laberinto)
     posiblePortal = distanciaPortal((f, c), portales, salida)
-    if (contador - posiblePortal >= mejor_solucion.mejor_camino or distancia_restante + contador > mejor_solucion.mejor_camino) and mejor_solucion.mejor_camino != -1:
-        print("PODA!")
+    if (contador - posiblePortal >= mejor_solucion.mejor_camino or distancia_restante + contador - 8 > mejor_solucion.mejor_camino) and mejor_solucion.mejor_camino != -1:
         return
     if laberinto[f][c] == "S":
         if contador < mejor_solucion.mejor_camino or mejor_solucion.mejor_camino == -1:
@@ -18,18 +17,19 @@ def solucion(f: int, c: int, laberinto: list[list[str]], matrizVis: list[list[in
     if laberinto[f][c] not in ["#", ".", "E", "S"]:
         otroPortal = buscarPortal(laberinto, (f, c), laberinto[f][c])
         if len(otroPortal) == 2 and matrizVis[otroPortal[0]][otroPortal[1]] != 1:
-            temporalcar = laberinto[f][c]
+            letraPortal = laberinto[f][c]
             laberinto[f][c] = "."
             laberinto[otroPortal[0]][otroPortal[1]] = "."
             solucion(otroPortal[0], otroPortal[1], laberinto,
-                     matrizVis, contador + 1, mejor_solucion, salida, portales)
-            laberinto[f][c] = temporalcar
-            laberinto[otroPortal[0]][otroPortal[1]] = temporalcar
+                     matrizVis, contador + 1, mejor_solucion, salida)
+            laberinto[f][c] = letraPortal
+            laberinto[otroPortal[0]][otroPortal[1]] = letraPortal
 
     for i in [(0, 1), (1, 0), (0, -1), (-1, 0)]:
         if esPosible(f + i[0], c + i[1], laberinto) and matrizVis[f + i[0]][c + i[1]] != 1:
             solucion(f + i[0], c + i[1], laberinto, matrizVis,
-                     contador + 1, mejor_solucion, salida, portales)
+                     contador + 1, mejor_solucion, salida)
+
     matrizVis[f][c] = 0
 
 
@@ -41,7 +41,7 @@ def main():
         [0 for _ in range(len(laberinto[0]))] for _ in range(len(laberinto))]
     mejor_solucion = SolucionOptima()
     solucion(entrada[0], entrada[1], laberinto,
-             matrizVisitados, 0, mejor_solucion, salida, buscarPortales(laberinto))
+             matrizVisitados, 0, mejor_solucion, salida)
     print("Mejor solución:", mejor_solucion.mejor_camino)
 
 

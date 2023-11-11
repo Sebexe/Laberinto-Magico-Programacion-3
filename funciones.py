@@ -9,9 +9,11 @@ def abrirLaberinto(fuente: str) -> list[list[str]]:
     return laberinto
 
 
+
 class SolucionOptima:
     def __init__(self) -> None:
         self.mejor_camino = -1
+
 
 
 def encontrarCaracter(laberinto : list[list[str]], caracter:str) -> tuple:
