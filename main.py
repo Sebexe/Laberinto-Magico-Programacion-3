@@ -2,6 +2,7 @@ from funciones import *
 
 
 def solucion(f: int, c: int, laberinto: list[list[str]], matrizVis: list[list[int]], contador: int, mejor_solucion: SolucionOptima, salida, hPortales: bool):
+    """Esta funcion busca la solucion al laberinto. Costo: 4^(n*m)"""
     primera = contador > mejor_solucion.mejor_camino
     segunda = not hPortales and (calcular_distancia(
         (f, c), salida) - contador > mejor_solucion.mejor_camino)
@@ -38,12 +39,17 @@ def solucion(f: int, c: int, laberinto: list[list[str]], matrizVis: list[list[in
 
 def main():
     laberinto = abrirLaberinto("laberinto.txt")
+
     entrada = encontrarCaracter(laberinto, 'E')
     salida = encontrarCaracter(laberinto, 'S')
+    if entrada == () or salida == ():
+        print("No se encontró una entrada o una salida.")
+        sys.exit(1)
     portales = len(buscar_portales(laberinto)) != 0
     matrizVisitados = [
         [0 for _ in range(len(laberinto[0]))] for _ in range(len(laberinto))]
     mejor_solucion = SolucionOptima()
+
     solucion(entrada[0], entrada[1], laberinto,
              matrizVisitados, 0, mejor_solucion, salida, portales)
     print("Mejor solución:", mejor_solucion.mejor_camino)

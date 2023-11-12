@@ -1,4 +1,5 @@
 from typing import List, Tuple, Dict
+import sys
 
 
 def abrirLaberinto(fuente: str) -> list[list[str]]:
@@ -38,8 +39,12 @@ def esPosible(f, c, matriz) -> bool:
 
 
 def calcular_distancia(origen: tuple, salida: tuple) -> int:
-    """Esta funcion calcula la distancia entre dos puntos segun la distancia de Manhattan. Costo: O(1)"""
-    return (abs(origen[0] - salida[0]) + abs(origen[1] - salida[1]))
+    try:
+        """Esta funcion calcula la distancia entre dos puntos segun la distancia de Manhattan. Costo: O(1)"""
+        return (abs(origen[0] - salida[0]) + abs(origen[1] - salida[1]))
+    except IndexError:
+        print("Es muy probable que no exista una salida. Revisa el laberinto.")
+        sys.exit(1)
 
 
 def exportarSolucion(laberinto, matriz, movimientos):
@@ -64,8 +69,6 @@ def buscar_portales(laberinto: List[List[str]]) -> Dict[str, List[Tuple[int, int
             elif char not in [".", "#", "E", "S"]:
                 portales[char] = [(row, col)]
     return portales
-
-
 
 
 class SolucionOptima:
