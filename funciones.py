@@ -1,4 +1,6 @@
 from typing import List, Tuple, Dict
+
+
 def abrirLaberinto(fuente: str) -> list[list[str]]:
     """Esta función abre un archivo de texto y lo convierte en una matriz de caracteres Costo: O(n*m)"""
     with open(fuente, "r") as archivo:
@@ -42,16 +44,14 @@ def calcular_distancia(origen: tuple, salida: tuple) -> int:
 
 def exportarSolucion(laberinto, matriz, movimientos):
     if movimientos != -1:
-        with open('laberintoSolucion.txt', 'w') as archivo:
+        with open('laberintoSolucion.txt', 'w', encoding="utf-8") as archivo:
             for i in range(len(laberinto)):
                 for j in range(len(laberinto[0])):
                     if matriz[i][j] == 1 and laberinto[i][j] == ".":
-                        archivo.write("X")
+                        archivo.write("x")
                     else:
                         archivo.write(laberinto[i][j])
                 archivo.write("\n")
-
-
 
 
 def buscar_portales(laberinto: List[List[str]]) -> Dict[str, List[Tuple[int, int]]]:
@@ -64,18 +64,6 @@ def buscar_portales(laberinto: List[List[str]]) -> Dict[str, List[Tuple[int, int
             elif char not in [".", "#", "E", "S"]:
                 portales[char] = [(row, col)]
     return portales
-
-
-def distancia_portal(origen: Tuple[int, int], portales: Dict[str, List[Tuple[int, int]]], salida: Tuple[int, int]) -> int:
-    """Esta funcion calcula la distancia de un portal a la salida, desde la posicion actual del jugador hasta el portal y del portal a la salida Costo: O(n)"""
-    distancia_minima = float("inf")
-    for portal in portales.values():
-        for portal_pos in portal:
-            distancia_total = calcular_distancia(origen, portal_pos) + calcular_distancia(portal_pos, salida)
-            if distancia_total < distancia_minima:
-                distancia_minima = distancia_total
-    return distancia_minima
-
 
 
 

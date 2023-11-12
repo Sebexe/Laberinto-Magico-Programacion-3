@@ -4,15 +4,14 @@ from funciones import *
 def solucion(f: int, c: int, laberinto: list[list[str]], matrizVis: list[list[int]], contador: int, mejor_solucion: SolucionOptima, salida, hPortales: bool):
     primera = contador > mejor_solucion.mejor_camino
     segunda = not hPortales and (calcular_distancia(
-        (f, c), salida) + contador > mejor_solucion.mejor_camino)
-    tercera = hPortales and (contador + distancia_portal((f,c),buscar_portales(laberinto),salida) > mejor_solucion.mejor_camino)
+        (f, c), salida) - contador > mejor_solucion.mejor_camino)
 
-    if (primera or segunda or tercera) and mejor_solucion.mejor_camino != -1:
+    if (primera or segunda) and mejor_solucion.mejor_camino != -1:
         return
     if laberinto[f][c] == "S":
         if contador < mejor_solucion.mejor_camino or mejor_solucion.mejor_camino == -1:
             mejor_solucion.mejor_camino = contador
-            matrizCopia = [[x for x in matrizVis[i]] for i in range(len(matrizVis))] #nopep8
+            matrizCopia = [[x for x in matrizVis[i]] for i in range(len(matrizVis))]  # nopep8
             mejor_solucion.matrizVisitados = matrizCopia
         return
 
