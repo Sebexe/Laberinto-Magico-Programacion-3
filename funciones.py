@@ -77,11 +77,7 @@ def distancia_portal(origen: Tuple[int, int], portales: Dict[str, List[Tuple[int
     return distancia_minima
 
 
-def podar_o_no_podar(pos: Tuple[int, int], salida: Tuple[int, int], contador: int, mejor_camino: int, laberinto: List[List[str]]) -> bool:
-    """Esta funcion verifica si se debe podar el arbol de busqueda o no"""
-    primera_condicion = calcular_distancia(pos, salida) + contador > mejor_camino
-    segunda_condicion = distancia_portal(pos, buscar_portales(laberinto), salida) + contador < mejor_camino
-    return primera_condicion and segunda_condicion
+
 
 
 class SolucionOptima:

@@ -5,8 +5,9 @@ def solucion(f: int, c: int, laberinto: list[list[str]], matrizVis: list[list[in
     primera = contador > mejor_solucion.mejor_camino
     segunda = not hPortales and (calcular_distancia(
         (f, c), salida) + contador > mejor_solucion.mejor_camino)
+    tercera = hPortales and (contador + distancia_portal((f,c),buscar_portales(laberinto),salida) > mejor_solucion.mejor_camino)
 
-    if (primera or segunda) and mejor_solucion.mejor_camino != -1:
+    if (primera or segunda or tercera) and mejor_solucion.mejor_camino != -1:
         return
     if laberinto[f][c] == "S":
         if contador < mejor_solucion.mejor_camino or mejor_solucion.mejor_camino == -1:
