@@ -5,8 +5,7 @@ def solucion(f: int, c: int, laberinto: list[list[str]], matrizVis: list[list[in
     """Esta funcion busca la solucion al laberinto. Costo: 4^(n*m)"""
     primera = contador > mejor_solucion.mejor_camino
     segunda = not hPortales and (calcular_distancia(
-        (f, c), salida) - contador > mejor_solucion.mejor_camino)
-
+        (f, c), salida) + contador > mejor_solucion.mejor_camino)
     if (primera or segunda) and mejor_solucion.mejor_camino != -1:
         return
     if laberinto[f][c] == "S":
@@ -29,7 +28,7 @@ def solucion(f: int, c: int, laberinto: list[list[str]], matrizVis: list[list[in
             laberinto[f][c] = letraPortal
             laberinto[otroPortal[0]][otroPortal[1]] = letraPortal
 
-    for i in [(0, 1), (1, 0), (0, -1), (-1, 0)]:
+    for i in [(1, 0), (0, 1), (0, -1), (-1, 0)]:
         if esPosible(f + i[0], c + i[1], laberinto) and matrizVis[f + i[0]][c + i[1]] != 1:
             solucion(f + i[0], c + i[1], laberinto, matrizVis,
                      contador + 1, mejor_solucion, salida, hPortales)
